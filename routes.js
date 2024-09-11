@@ -3,6 +3,8 @@ const fs = require('fs');
 const requestHandler = (req, res)=>{
    const url = req.url;
    const method = req.method;
+   
+   console.log(url,method,res.statusCode);
 
    if (url === "/") {
       res.setHeader("Content-Type", "text/html");
@@ -12,7 +14,6 @@ const requestHandler = (req, res)=>{
         "<body> <form method='POST' action='/message'> <input type='text' name='name'/> <input type='submit' /></form> </body>"
       );
       res.write("</html>");
-      console.log(res.statusCode);
       return res.end();
     }
    
