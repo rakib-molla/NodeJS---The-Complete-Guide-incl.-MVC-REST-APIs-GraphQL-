@@ -12,6 +12,9 @@ app.use(bodyParser.urlencoded({extended:false}))
 // send to static folder to front only this folder read access 
 app.use(express.static(path.join(rootDir, 'public')));
 
+// set globally  for pug default html template engine 
+app.set('view engine', 'pug');
+app.set('views','views');
 
 // all routes 
 app.use('/admin',adminData.routes);
