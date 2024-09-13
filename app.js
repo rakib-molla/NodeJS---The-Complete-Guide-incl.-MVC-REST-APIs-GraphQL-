@@ -23,7 +23,8 @@ app.use(shopRoutes);
 
 // send  404 not found page into frontend
 app.use((req, res, next)=>{
-  res.status(404).sendFile(path.join(rootDir, 'views','404-not-found.html'));
+  // res.status(404).sendFile(path.join(rootDir, 'views','404-not-found.html'));
+  res.render('404-not-found', {pageTitle: "404 Not Found"})
 })
 
 
