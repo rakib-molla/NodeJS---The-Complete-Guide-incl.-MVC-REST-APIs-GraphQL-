@@ -4,16 +4,17 @@ const rootDir = require('./utils/path');
 
 const bodyParser = require('body-parser');
 const app = express();
-const adminRoutes = require('./routes/admin');
+const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 app.use(bodyParser.urlencoded({extended:false}))
+
 // send to static folder to front only this folder read access 
 app.use(express.static(path.join(rootDir, 'public')));
 
 
 // all routes 
-app.use('/admin',adminRoutes);
+app.use('/admin',adminData.routes);
 app.use(shopRoutes);
 
 
