@@ -1,33 +1,24 @@
-const express = require('express');
 const path = require('path');
-const rootDir = require('./utils/path');
 
+const express = require('express');
 const bodyParser = require('body-parser');
+
 const app = express();
+
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
 const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
-app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// send to static folder to front only this folder read access 
-app.use(express.static(path.join(rootDir, 'public')));
-
-// set globally  for pug default html template engine 
-app.set('view engine', 'pug');
-app.set('views','views');
-
-// all routes 
-app.use('/admin',adminData.routes);
+app.use('/admin', adminData.routes);
 app.use(shopRoutes);
 
+app.use((req, res, next) => {
+  res.status(404).render('404', { pageTitle: 'Page Not Found' });
+});
 
-// send  404 not found page into frontend
-app.use((req, res, next)=>{
-  // res.status(404).sendFile(path.join(rootDir, 'views','404-not-found.html'));
-  res.render('404-not-found', {pageTitle: "404 Not Found"})
-})
-
-
-app.listen(3000, ()=>{
-  console.log('server is running on port: 3000')
-})
+app.listen(3000);
