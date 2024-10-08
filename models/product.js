@@ -17,8 +17,14 @@ const productSchema = new mongoose.Schema({
    imageUrl:{
       type: String,
       required: true,
+   },
+   userId:{
+      type: mongoose.Schema.Types.ObjectId,
+      require: true,
+      ref: 'User'
    }
 });
+
 
 module.exports = mongoose.model('Product', productSchema);
 
