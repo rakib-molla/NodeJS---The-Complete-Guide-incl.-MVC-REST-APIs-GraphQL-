@@ -33,23 +33,22 @@ app.use(shopRoutes);
 app.use(errorController.get404);
 
 mongoose
-  .connect(
-    'mongodb+srv://complete-node:complete-node@cluster0.clwxeiy.mongodb.net/complete-node?retryWrites=true&w=majority&appName=Cluster0'
-  )
+.connect(
+  'mongodb+srv://complete-node:complete-node@cluster0.clwxeiy.mongodb.net/complete-node?retryWrites=true&w=majority&appName=Cluster0'
+)
   .then(result => {
-    User.findOne().then(user =>{
-      if(!user){
+    User.findOne().then(user => {
+      if (!user) {
         const user = new User({
-          name: 'Rakib',
-          email: 'rakib@gmail.com',
-          cart:{
-            items:[]
+          name: 'Max',
+          email: 'max@test.com',
+          cart: {
+            items: []
           }
-        })
+        });
         user.save();
       }
-    })
-    
+    });
     app.listen(3000);
   })
   .catch(err => {
